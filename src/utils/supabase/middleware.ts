@@ -1,6 +1,9 @@
 import { createServerClient } from "@supabase/ssr"
 import { type NextRequest, NextResponse } from "next/server"
 
+const publicPaths = ["/", "/sign-in", "/sign-up", "/forgot-password"]
+const protectedPaths = ["/reset-password"]
+
 export const updateSession = async (request: NextRequest) => {
 	let response = NextResponse.next({
 		request: {
@@ -35,13 +38,20 @@ export const updateSession = async (request: NextRequest) => {
 	// https://supabase.com/docs/guides/auth/server-side/nextjs
 	const user = await supabase.auth.getUser()
 
-	// protected routes
-	if (request.nextUrl.pathname.startsWith("/protected") && user.error) {
+	// Check if user is logged in before accessing protected routes
+	if (
+		protectedPaths.some((path) =>
+			request.nextUrl.pathname.startsWith(path)
+		) &&
+		user.error
+	) {
 		return NextResponse.redirect(new URL("/sign-in", request.url))
 	}
 
-	if (request.nextUrl.pathname === "/" && !user.error) {
-		return NextResponse.redirect(new URL("/protected", request.url))
+	// Redirect logged-in users from public paths
+	if (publicPaths.includes(request.nextUrl.pathname) && !user.error) {
+		// ! Change the URL to the home page when there is one
+		return NextResponse.redirect(new URL("/", request.url))
 	}
 
 	return response

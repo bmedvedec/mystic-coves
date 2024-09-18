@@ -1,6 +1,6 @@
-import FormCard from "@/components/form-card"
-import { Message } from "@/components/form-message"
-import SignInForm from "@/components/sign-in-form"
+import FormCard from "@/components/forms/form-card"
+import { Message } from "@/components/forms/form-message"
+import SignInForm from "@/components/forms/sign-in-form"
 
 export default function SignIn({ searchParams }: { searchParams: Message }) {
 	return (

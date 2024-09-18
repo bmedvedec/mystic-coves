@@ -83,7 +83,7 @@ export default function SignUpForm({ message }: { message: Message }) {
 				</form>
 			</Form>
 
-			<div className="mt-4 text-center text-sm">
+			<div className="mt-2 text-center text-sm">
 				Already have an account?{" "}
 				<Link
 					href="/sign-in"

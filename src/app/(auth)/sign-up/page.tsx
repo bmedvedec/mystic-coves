@@ -1,6 +1,6 @@
-import { CustomFormMessage, Message } from "@/components/form-message"
-import FormCard from "@/components/form-card"
-import SignUpForm from "@/components/sign-up-form"
+import { CustomFormMessage, Message } from "@/components/forms/form-message"
+import FormCard from "@/components/forms/form-card"
+import SignUpForm from "@/components/forms/sign-up-form"
 
 export default function SignUp({ searchParams }: { searchParams: Message }) {
 	if ("message" in searchParams) {
